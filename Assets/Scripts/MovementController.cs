@@ -9,6 +9,10 @@ public class MovementController : MonoBehaviour
     public float movementSpeed = 40f;
     private float movementDirection;    // Direction in which player should move. [-1, 1]; -1 -> left; 1 -> right.
 
+    [Range(0, 1)] [SerializeField] private float slimeSlowDownFactor = 0.5f;    // How much the player slows down when hitting 
+
+    private float speedMultiplier = 1.0f;
+
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
 
@@ -16,7 +20,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         // Read input
-        movementDirection = Input.GetAxis("Horizontal") * movementSpeed;
+        movementDirection = Input.GetAxis("Horizontal") * movementSpeed * speedMultiplier;
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
@@ -36,5 +40,26 @@ public class MovementController : MonoBehaviour
         // Move the player
         characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
         jump = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        switch (collision.tag)
+        {
+            case "Slime":
+                Debug.Log("Slimed");
+                speedMultiplier *= slimeSlowDownFactor;
+                characterController.m_JumpMultiplier = slimeSlowDownFactor;
+                break;
+
+            default:
+                Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
+                break;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        speedMultiplier = 1.0f;
+        characterController.m_JumpMultiplier = 1.0f;
     }
 }
