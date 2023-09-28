@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Temp to stop compilation errors
-public float movementSpeed = 100.0f;
+
 
 public class BushScript : MonoBehaviour
 {
+    // Temp to stop compilation errors
+    public float movementSpeed = 100.0f;
     public float BushSpeed = 0.8f;
     public int CurrBranches = 0;
     public int timer = 0;
