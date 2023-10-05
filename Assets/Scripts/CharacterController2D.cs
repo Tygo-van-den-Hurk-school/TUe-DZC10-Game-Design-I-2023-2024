@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -30,6 +32,10 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+	//Light shaders
+	public Material darknessMaterial;
+	public UnityEngine.Rendering.Universal.Light2D lightSource;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -58,6 +64,11 @@ public class CharacterController2D : MonoBehaviour
 					OnLandEvent.Invoke();
 			}
 		}
+
+		//Light shaders
+		Vector3 playerPosition = transform.position;
+
+		lightSource.transform.position = playerPosition;
 	}
 
 
