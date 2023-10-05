@@ -9,10 +9,6 @@ public class MovementController : MonoBehaviour
     public float movementSpeed = 40f;
     private float movementDirection;    // Direction in which player should move. [-1, 1]; -1 -> left; 1 -> right.
 
-    [Range(0, 1)] [SerializeField] private float slimeSlowDownFactor = 0.5f;    // How much the player slows down when hitting 
-
-    private float speedMultiplier = 1.0f;
-
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
 
@@ -20,7 +16,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         // Read input
-        movementDirection = Input.GetAxis("Horizontal") * movementSpeed * speedMultiplier;
+        movementDirection = Input.GetAxis("Horizontal") * movementSpeed;
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
@@ -58,6 +54,7 @@ public class MovementController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // TODO: make the player slowly regain their speed
         speedMultiplier = 1.0f;
         characterController.m_JumpMultiplier = 1.0f;
     }
