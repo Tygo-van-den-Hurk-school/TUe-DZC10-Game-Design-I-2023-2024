@@ -37,4 +37,25 @@ public class MovementController : MonoBehaviour
         characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
         jump = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        switch (collision.tag)
+        {
+            case "Slime":
+                speedMultiplier *= slimeSlowDownFactor;
+                characterController.m_JumpMultiplier = slimeSlowDownFactor;
+                break;
+
+            default:
+                Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
+                break;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // TODO: make the player slowly regain their speed
+        speedMultiplier = 1.0f;
+        characterController.m_JumpMultiplier = 1.0f;
+    }
 }
