@@ -46,7 +46,6 @@ public class MovementController : MonoBehaviour
         switch (collision.tag)
         {
             case "Slime":
-                Debug.Log("Slimed");
                 speedMultiplier *= slimeSlowDownFactor;
                 characterController.m_JumpMultiplier = slimeSlowDownFactor;
                 break;
