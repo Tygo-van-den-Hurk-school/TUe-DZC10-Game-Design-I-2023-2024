@@ -6,7 +6,7 @@ using UnityEngine;
 public class MonsterMovementScripts : MonoBehaviour
 {
     Transform player;
-    bool isChasing;
+    public bool isChasing = false;
     float speed = 25;
     Rigidbody2D Monster;
     int timer = 0;
@@ -16,15 +16,19 @@ public class MonsterMovementScripts : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         Monster = GetComponent<Rigidbody2D>();
-        isChasing = true;          // can be used later to turn chasing off for whatever reason
+        isChasing = false;          // can be used later to turn chasing off for whatever reason
     }
 
     // Update is called once per frame
     void Update()
     {   
         timer += 1;
-        Debug.Log(timer);
-        if (timer > 600)
+        //Debug.Log(timer);
+        //if (timer > 600)
+        //{
+        //    Chase();
+        //}
+        if (isChasing == true)
         {
             Chase();
         }
@@ -34,14 +38,19 @@ public class MonsterMovementScripts : MonoBehaviour
     // Handles chase movement
     void Chase()
     {
-        if (!isChasing)
+        if (isChasing == false) 
+        {
             return;
+        } else if (isChasing == true)
+        {
+            var direction = (player.position - transform.position).normalized;
+            var distance = Vector3.Distance(player.transform.position, Monster.transform.position);
+            var BandingFactor = Mathf.Sqrt(distance);
+            Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
+            // Debug.Log(speed * BandingFactor);
+        }
         
-        var direction = (player.position - transform.position).normalized;
-        var distance = Vector3.Distance(player.transform.position, Monster.transform.position);
-        var BandingFactor = Mathf.Sqrt(distance);
-        Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
-        // Debug.Log(speed * BandingFactor);
+
     }
 
     // Collision with player

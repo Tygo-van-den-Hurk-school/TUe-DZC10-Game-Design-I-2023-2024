@@ -16,6 +16,9 @@ public class MovementController : MonoBehaviour
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
 
+    public bool cutsceneActive;
+    public CutsceneScript cutsceneManager;
+
     // Update is called once per frame
     void Update()
     {
@@ -38,9 +41,13 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         // Move the player
-        characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        if (cutsceneActive == false)
+        {
+            characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
+            jump = false;
+        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         switch (collision.tag)
@@ -48,6 +55,10 @@ public class MovementController : MonoBehaviour
             case "Slime":
                 speedMultiplier *= slimeSlowDownFactor;
                 characterController.m_JumpMultiplier = slimeSlowDownFactor;
+                break;
+            
+            case "CutSceneTrigger":
+                cutsceneManager.StartCutscene();
                 break;
 
             default:
