@@ -6,8 +6,9 @@ public class CameraScript : MonoBehaviour
 {
     public Transform player;
     public Vector3 cameraOffset;
-    public float cameraSpeedHorizontal = 0.9f;
+    public float cameraSpeedHorizontal = 0.95f;
     public float cameraSpeedVertical = 0.2f;
+    public float facingDirection = 1.0f;
 
     private Vector3 targetPosition;
 
@@ -22,13 +23,19 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float newFacingDirection = Mathf.Sign(player.localScale.x);
+        if (newFacingDirection != 0)
+        {
+            facingDirection = newFacingDirection;
+        }
     }
 
     void FixedUpdate()
     {
+        // directional offset
+        float offsetX = cameraOffset.x * facingDirection;
         // Set a new target position
-        targetPosition = new Vector3(player.position.x + cameraOffset.x, player.position.y + cameraOffset.y, transform.position.z);
+        targetPosition = new Vector3(player.position.x + offsetX, player.position.y + cameraOffset.y, transform.position.z);
         // Get new speed values
         float speedX = Time.deltaTime * cameraSpeedHorizontal;
         float speedY = Time.deltaTime * cameraSpeedVertical;
