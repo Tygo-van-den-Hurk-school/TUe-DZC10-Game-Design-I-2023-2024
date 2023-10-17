@@ -12,7 +12,8 @@ public class CameraScript : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    public bool cutsceneActive;
+    public CutsceneScript cutscenescript;
+
 
 
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class CameraScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (cutsceneActive == false)
+        if (cutscenescript.cutsceneActive == false)
         {
             // directional offset
             float offsetX = cameraOffset.x * facingDirection;
@@ -47,6 +48,9 @@ public class CameraScript : MonoBehaviour
             transform.position = new Vector3(Mathf.Lerp(transform.position.x, targetPosition.x, speedX),
             Mathf.Lerp(transform.position.y, targetPosition.y, speedY),
             transform.position.z);
+        } else if (cutscenescript.cutsceneActive == true)
+        {
+            return;
         }
     }
 }

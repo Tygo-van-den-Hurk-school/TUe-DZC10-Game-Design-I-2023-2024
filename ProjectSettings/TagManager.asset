@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Slime
   - CutSceneTrigger
+  - Monster
   layers:
   - Default
   - TransparentFX

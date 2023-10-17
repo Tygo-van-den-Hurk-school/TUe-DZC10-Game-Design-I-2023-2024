@@ -11,6 +11,8 @@ public class MonsterMovementScripts : MonoBehaviour
     Rigidbody2D Monster;
     int timer = 0;
 
+    public CutsceneScript cutscenescript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,10 @@ public class MonsterMovementScripts : MonoBehaviour
         //{
         //    Chase();
         //}
+        if (cutscenescript.monsterMove == true)
+        {
+            isChasing = true;
+        }
         if (isChasing == true)
         {
             Chase();
