@@ -16,8 +16,9 @@ public class MovementController : MonoBehaviour
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
 
-    public bool cutsceneActive;
     public CutsceneScript cutsceneManager;
+
+    public bool characterStunned = false;
 
     // Update is called once per frame
     void Update()
@@ -41,9 +42,13 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         // Move the player
-        if (cutsceneActive == false)
+        if (cutsceneManager.cutsceneActive == false && characterStunned == false)
         {
             characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
+            jump = false;
+        } else if (cutsceneManager.cutsceneActive == true || characterStunned == true)
+        {
+            characterController.Move(0, crouch, jump);
             jump = false;
         }
     }
@@ -60,6 +65,16 @@ public class MovementController : MonoBehaviour
             case "CutSceneTrigger":
                 cutsceneManager.StartCutscene();
                 break;
+            
+            case "Monster":
+                Debug.Log("Player lost the game!");
+                break;
+
+            case "Rock":
+                // This doesn't work yet
+                Debug.Log("Collided with rock");
+                StunHandler();
+                break;
 
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
@@ -71,5 +86,14 @@ public class MovementController : MonoBehaviour
     {
         speedMultiplier = 1.0f;
         characterController.m_JumpMultiplier = 1.0f;
+    }
+
+    IEnumerator StunHandler()
+    {
+        characterStunned = true;
+        
+        yield return new WaitForSeconds(1.5f);
+
+        characterStunned = false;
     }
 }
