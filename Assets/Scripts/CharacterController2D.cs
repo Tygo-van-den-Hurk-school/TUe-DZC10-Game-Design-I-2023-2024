@@ -6,6 +6,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
 	[HideInInspector] public float m_JumpMultiplier = 1f;						// Multiplier applied to the jumping force
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
+	private float m_SlideSpeed = 1.5f;											// Speed multiplier when sliding
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
@@ -30,6 +31,8 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+	private float m_startSlidingBoostTime = 0.0f;	
+	private bool is_sliding = false;
 
 	private void Awake()
 	{
@@ -63,7 +66,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, bool slide)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -74,6 +77,21 @@ public class CharacterController2D : MonoBehaviour
 				crouch = true;
 			}
 		}
+
+		
+		// After sliding, disable this ability for 5 seconds. 
+		if (slide && !is_sliding) {
+			m_startSlidingBoostTime = Time.time;
+			is_sliding = true;
+		} 
+
+		if (is_sliding && (Time.time - m_startSlidingBoostTime <= 1.0f)) {
+			move *= m_SlideSpeed;
+		} else {
+			is_sliding = false;
+		}
+
+		Debug.Log(move);
 
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)

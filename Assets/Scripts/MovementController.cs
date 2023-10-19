@@ -12,9 +12,9 @@ public class MovementController : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float slimeSlowDownFactor = 0.5f;    // How much the player slows down when hitting 
 
     private float speedMultiplier = 1.0f;
-
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
+    private bool slide = false;         // Whether the player is invoke sliding
 
     // Update is called once per frame
     void Update()
@@ -32,13 +32,18 @@ public class MovementController : MonoBehaviour
         } else if (Input.GetButtonUp("Crouch"))
         {
             crouch = false;
+        } 
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            slide = true;
+        } else if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            slide = false;
         }
     }
 
     private void FixedUpdate()
     {
-        // Move the player
-        characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
+        characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump, slide);
         jump = false;
     }
 
@@ -49,7 +54,13 @@ public class MovementController : MonoBehaviour
                 speedMultiplier *= slimeSlowDownFactor;
                 characterController.m_JumpMultiplier = slimeSlowDownFactor;
                 break;
-
+            case "Log":
+                if (!crouch) {
+                    Debug.LogWarning("Triggered collision with log but not crouching!");
+                } else {
+                    Debug.LogWarning("Triggered collision with log and is crouching");
+                }
+                break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
                 break;
