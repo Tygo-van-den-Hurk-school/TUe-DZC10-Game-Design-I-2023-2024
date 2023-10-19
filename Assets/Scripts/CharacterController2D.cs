@@ -31,7 +31,9 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
-	private float m_startSlidingBoostTime = 0.0f;	
+	private float m_startSlidingBoostTime = 0.0f;
+	private float m_endSlidingBoostTime = 0.0f;
+	private float m_slidingCoolDown = 5.0f;
 	private bool is_sliding = false;
 
 	private void Awake()
@@ -80,18 +82,21 @@ public class CharacterController2D : MonoBehaviour
 
 		
 		// After sliding, disable this ability for 5 seconds. 
-		if (slide && !is_sliding) {
-			m_startSlidingBoostTime = Time.time;
-			is_sliding = true;
-		} 
-
+		if (Time.time - m_endSlidingBoostTime >= m_slidingCoolDown || m_endSlidingBoostTime == 0.0) {
+			if (slide && !is_sliding) {
+				m_startSlidingBoostTime = Time.time;
+				is_sliding = true;
+			} 
+		}
+	
 		if (is_sliding && (Time.time - m_startSlidingBoostTime <= 1.0f)) {
 			move *= m_SlideSpeed;
-		} else {
+		} else if (is_sliding && (Time.time - m_startSlidingBoostTime > 1.0f)) {
 			is_sliding = false;
+			m_endSlidingBoostTime = Time.time;
 		}
 
-		Debug.Log(move);
+		Debug.Log(m_endSlidingBoostTime);
 
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
