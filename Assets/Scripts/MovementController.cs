@@ -12,9 +12,9 @@ public class MovementController : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float slimeSlowDownFactor = 0.5f;    // How much the player slows down when hitting 
 
     private float speedMultiplier = 1.0f;
-
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
+    private bool slide = false;         // Whether the player is invoke sliding
 
     public CutsceneScript cutsceneManager;
 
@@ -36,6 +36,12 @@ public class MovementController : MonoBehaviour
         } else if (Input.GetButtonUp("Crouch"))
         {
             crouch = false;
+        } 
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            slide = true;
+        } else if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            slide = false;
         }
     }
 
@@ -44,11 +50,11 @@ public class MovementController : MonoBehaviour
         // Move the player
         if (cutsceneManager.cutsceneActive == false && characterStunned == false)
         {
-            characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump);
+            characterController.Move(movementDirection * Time.fixedDeltaTime, crouch, jump, slide);
             jump = false;
         } else if (cutsceneManager.cutsceneActive == true || characterStunned == true)
         {
-            characterController.Move(0, crouch, jump);
+            characterController.Move(0, crouch, jump, slide);
             jump = false;
         }
     }
@@ -61,7 +67,6 @@ public class MovementController : MonoBehaviour
                 speedMultiplier *= slimeSlowDownFactor;
                 characterController.m_JumpMultiplier = slimeSlowDownFactor;
                 break;
-            
             case "CutSceneTrigger":
                 cutsceneManager.StartCutscene();
                 break;
@@ -75,7 +80,13 @@ public class MovementController : MonoBehaviour
                 Debug.Log("Collided with rock");
                 StunHandler();
                 break;
-
+            case "Log":
+                if (!crouch) {
+                    Debug.LogWarning("Triggered collision with log but not crouching!");
+                } else {
+                    Debug.LogWarning("Triggered collision with log and is crouching");
+                }
+                break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
                 break;
