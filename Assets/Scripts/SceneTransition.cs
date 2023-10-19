@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     public string sceneToLoad;
+    Fade fade;
+
+    void Start()
+    {
+        fade = FindObjectOfType<Fade>();
+    }
+
+
 
     public void LoadGameScene()
     {
@@ -15,6 +23,7 @@ public class SceneTransition : MonoBehaviour
 
     private IEnumerator LoadSceneAsync()
     {
+        fade.FadeIn();
         yield return new WaitForSeconds(1.0f);
 
         SceneManager.LoadScene(sceneToLoad);
