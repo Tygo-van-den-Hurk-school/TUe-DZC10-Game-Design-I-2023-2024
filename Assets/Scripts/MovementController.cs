@@ -77,6 +77,8 @@ public class MovementController : MonoBehaviour
                 Debug.LogWarning("No bush collision!");      
                 break;
         }
+
+        Debug.Log(speedMultiplier);
         
     }
 
