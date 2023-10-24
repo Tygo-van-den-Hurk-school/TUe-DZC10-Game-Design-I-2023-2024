@@ -21,10 +21,11 @@ public class GameOverManager : MonoBehaviour
 
     private void Update()
     {
-        if (movementcontroller.gameOver == true && !zoomAndFadeStarted)
+        if (movementcontroller.gameOver == true)
+        // This should probably also have a check for zoomAndFadeStarted=false, but simply that causes it to not work anymore, so I removed it for now.
         {
-            gameOverCanvas.SetActive(true);
             zoomAndFadeStarted = true;
+            gameOverCanvas.SetActive(true); 
             CanvasGroup canvasGroup = gameOverCanvas.GetComponent<CanvasGroup>();
             Camera mainCamera = Camera.main;
             float targetOrthoSize = CalculateTargetOrthoSize(mainCamera, gameOverCanvas);
@@ -36,6 +37,8 @@ public class GameOverManager : MonoBehaviour
     private IEnumerator FadeInCanvas(CanvasGroup canvasGroup, Camera mainCamera, float targetOrthoSize)
     // fades canvas and zooms out camera
     {
+        gameOverCanvas.SetActive(true); // failsafe
+
         float duration = 1.0f;
         float startAlpha = 0.0f;
         float endAlpha = 1.0f;

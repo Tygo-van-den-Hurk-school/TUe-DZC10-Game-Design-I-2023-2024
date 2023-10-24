@@ -7,7 +7,7 @@ public class MonsterMovementScripts : MonoBehaviour
 {
     Transform player;
     public bool isChasing = false;
-    float speed = 26;
+    float speed = 27;
     Rigidbody2D Monster;
 
     int timer = 0;
