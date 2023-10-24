@@ -124,6 +124,10 @@ public class MovementController : MonoBehaviour
                 Debug.Log("Collided with rock");
                 OnStunned();
                 break;
+            case "Spike":
+                Debug.Log("Player lost the game!");
+                gameOver = true;
+                break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
                 break;
