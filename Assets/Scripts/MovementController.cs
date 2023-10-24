@@ -65,15 +65,16 @@ public class MovementController : MonoBehaviour
         // Bush detection
         // Permanent debuff (-10% speed if player hits a bush, -10% more if hit a bush twice, get stunned but reset speed if hit 3 times)
         switch (bushCollisionCount) {
-            case 1:
+            case 2:
                 speedMultiplier *= 0.9f;
                 characterController.m_JumpMultiplier = 0.9f;
                 break;
-            case 2:
+            case 4:
                 speedMultiplier *= 0.8f;
                 characterController.m_JumpMultiplier = 0.8f;
                 break;
-            case 3:
+            case 6:
+                Debug.Log("Stunned bc bush!");
                 OnStunned();
                 bushCollisionCount = 0;  
                 break;
@@ -112,8 +113,8 @@ public class MovementController : MonoBehaviour
                 cutsceneManager.StartCutscene();
                 break;
             case "Bush":
-                Debug.Log("Player hit the bush!");
                 bushCollisionCount += 1;
+                Debug.Log(bushCollisionCount);
                 break;
             case "Monster":
                 Debug.Log("Player lost the game!");
