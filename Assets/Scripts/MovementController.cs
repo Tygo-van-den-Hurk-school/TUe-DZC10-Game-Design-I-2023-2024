@@ -15,6 +15,7 @@ public class MovementController : MonoBehaviour
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
     private bool slide = false;         // Whether the player is invoke sliding
+    public bool gameOver = false;
 
     public CutsceneScript cutsceneManager;
 
@@ -73,8 +74,8 @@ public class MovementController : MonoBehaviour
             
             case "Monster":
                 Debug.Log("Player lost the game!");
+                gameOver = true;
                 break;
-
             case "Rock":
                 // This doesn't work yet
                 Debug.Log("Collided with rock");
