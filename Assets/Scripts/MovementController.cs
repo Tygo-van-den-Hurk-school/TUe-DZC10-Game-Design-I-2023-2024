@@ -17,9 +17,13 @@ public class MovementController : MonoBehaviour
     private bool jump = false;          // Whether the player should jump
     private bool crouch = false;        // Whether the player should crouch
     private bool slide = false;         // Whether the player is invoke sliding
+    
+    public bool gameOver = false;       // Trigger for the GameOver screen
+    
     private int bushCollisionCount = 0; // Number of times the player hit a bush
     private bool stunned = false;       // Whether the character is stunned
     private float startingStunnedTime;      // Time stamp when character is first stunned
+
     public CutsceneScript cutsceneManager;
 
     public bool characterStunned = false;
@@ -113,6 +117,7 @@ public class MovementController : MonoBehaviour
                 break;
             case "Monster":
                 Debug.Log("Player lost the game!");
+                gameOver = true;
                 break;
             case "Rock":
                 Debug.Log("Collided with rock");
