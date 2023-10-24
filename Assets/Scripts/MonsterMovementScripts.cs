@@ -9,11 +9,16 @@ public class MonsterMovementScripts : MonoBehaviour
     public bool isChasing = false;
     float speed = 25;
     Rigidbody2D Monster;
+
     int timer = 0;
     public int currAI = 0;
+    float timeBetweenAIChanges = 3.0f;
+    float timeSinceLastAIChange = 0.0f;
+    float smoothingSpeed = 0.5f;
+
     Vector3 playerSpeed;
     Vector3 lastPos;
-    public float truePlayerSpeed;
+    Vector3 targetOffset = Vector3.zero;
 
     public CutsceneScript cutscenescript;
 
@@ -30,11 +35,11 @@ public class MonsterMovementScripts : MonoBehaviour
     void Update()
     {   
         timer += 1;
-        //Debug.Log(timer);
-        if (timer > 600)
+        timeSinceLastAIChange += Time.deltaTime;
+        if (timeSinceLastAIChange >= timeBetweenAIChanges)
         {
             DecideAI();
-            timer = 0;
+            timeSinceLastAIChange = 0.0f;
         }
         if (cutscenescript.monsterMove == true)
         {
@@ -49,8 +54,7 @@ public class MonsterMovementScripts : MonoBehaviour
     // Decide which AI to use
     void DecideAI()
     {
-        // Temporarily disabled (as in, this range guarantees AI 0)
-        currAI = Random.Range(0,1);
+        currAI = Random.Range(0,5);
         Debug.Log(currAI);
     }
 
@@ -62,42 +66,42 @@ public class MonsterMovementScripts : MonoBehaviour
             return;
         } else if (isChasing == true)
         {
-            if (currAI == 0)
+            Vector3 desiredOffset = Vector3.zero;
+
+            switch (currAI)
             {
-                // Aggresive chasing AI
-                var direction = (player.position - transform.position).normalized;
-                var distance = Vector3.Distance(player.transform.position, Monster.transform.position);
-                var BandingFactor = Mathf.Sqrt(distance);
-                Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
-                // Debug.Log(speed * BandingFactor);
-            } else if (currAI == 1)
-            {
-                // Aggresion based on player speed - does not work
-                var direction = (player.position - transform.position).normalized;
-                if (lastPos != player.position)
-                {
-                    playerSpeed = player.position - lastPos;
-                    playerSpeed /= Time.deltaTime;
-                    lastPos = player.position;
-                    var truePlayerSpeed = playerSpeed.normalized;
-                }
-                var BandingFactor = Mathf.Sqrt(truePlayerSpeed);
-                Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
+                case 0:
+                    desiredOffset = new Vector3(0.0f, 0.0f, 0.0f);
+                    break;
+                case 1:
+                    desiredOffset = new Vector3(-0.07f, 0.0f, 0.0f);
+                    break;
+                case 2:
+                    desiredOffset = new Vector3(-0.05f, 0.05f, 0.0f);
+                    break;
+                case 3:
+                    desiredOffset = new Vector3(-0.05f, -0.05f, 0.0f);
+                    break;
+                case 4:
+                    desiredOffset = new Vector3(0.02f, 0.04f, 0.0f);
+                    break;
+                default:
+                    desiredOffset = new Vector3(-0.01f, 0.0f, 0.0f);
+                    break;
             }
+            // declare some useful variables
+            targetOffset = Vector3.Lerp(targetOffset, desiredOffset, smoothingSpeed * Time.deltaTime);
+            var playerPosition = player.transform.position;
+            var desiredPosition = new Vector3(playerPosition.x + targetOffset.x, playerPosition.y + targetOffset.y, playerPosition.z);
+            // chasing movement
+            var direction = (desiredPosition - transform.position).normalized;
+            var distance = Vector3.Distance(desiredPosition, Monster.transform.position);
+            var BandingFactor = Mathf.Log(2, Mathf.Sqrt(distance));
+            Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
+            // Debug.Log(speed * BandingFactor)
 
         }
         
 
-    }
-
-    // Collision with player
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Destroy(other.gameObject);
-            Debug.Log("player lost the game!");
-        }   
-        
     }
 }
