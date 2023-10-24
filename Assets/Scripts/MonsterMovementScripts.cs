@@ -5,63 +5,89 @@ using UnityEngine;
 
 public class MonsterMovementScripts : MonoBehaviour
 {
-    Transform player;
-    public bool isChasing = false;
-    float speed = 27;
+    [SerializeField] private Transform playerTransform;     // player position at any given time
+    [SerializeField] private float stalkingSpeed = 5f;      // the speed at which the AI moves while stalking the player
+    [SerializeField] private float chasingSpeed = 20f;      // the speed at which the AI moves while chasing the player
     Rigidbody2D Monster;
 
-    int timer = 0;
-    public int currAI = 0;
-    float timeBetweenAIChanges = 3.0f;
-    float timeSinceLastAIChange = 0.0f;
+    private enum CurrentBehavior
+    {
+        Idle,
+        Stalking,
+        Hiding,
+        Chasing
+    };
+    private CurrentBehavior currentBehavior;
+
     float smoothingSpeed = 0.5f;
 
     Vector3 playerSpeed;
     Vector3 lastPos;
     Vector3 targetOffset = Vector3.zero;
 
-    public CutsceneScript cutscenescript;
+    [SerializeField] private CutsceneScript cutsceneScript;
 
-    // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").transform;
         Monster = GetComponent<Rigidbody2D>();
-        isChasing = false;          // can be used later to turn chasing off for whatever reason
-        lastPos = player.position;
+        currentBehavior = CurrentBehavior.Idle;
+        lastPos = playerTransform.position;
     }
 
-    // Update is called once per frame
     void Update()
-    {   
-        timer += 1;
-        timeSinceLastAIChange += Time.deltaTime;
-        if (timeSinceLastAIChange >= timeBetweenAIChanges)
-        {
-            DecideAI();
-            timeSinceLastAIChange = 0.0f;
-        }
-        if (cutscenescript.monsterMove == true)
-        {
-            isChasing = true;
-        }
-        if (isChasing == true)
-        {
-            Chase();
-        }
+    {
+        DecideAI();
+        ActAI();
     }
 
     // Decide which AI to use
     void DecideAI()
     {
-        currAI = Random.Range(0,5);
-        Debug.Log(currAI);
+        
+    }
+
+    // Act accordingly to the current specified behavior
+    void ActAI()
+    {
+        switch (currentBehavior)
+        {
+            case CurrentBehavior.Idle:
+                Idle();
+                break;
+
+            case CurrentBehavior.Stalking:
+                break;
+
+            case CurrentBehavior.Chasing:
+                Chase();
+                break;
+
+            case CurrentBehavior.Hiding:
+                Hide();
+                break;
+
+            default: break;
+        }
+    }
+
+    // Enemy idling
+    void Idle()
+    {
+
+    }
+
+    // Enemy hiding from player after being spotted
+    void Hide()
+    {
+
     }
 
     // Handles chase movement
     void Chase()
     {
-        if (isChasing == false) 
+        // do not chase the player perfectly, rather overshoot/undershoot their
+        // position by a little bit and then rubber band into place
+        /*if (isChasing == false) 
         {
             return;
         } else if (isChasing == true)
@@ -91,7 +117,7 @@ public class MonsterMovementScripts : MonoBehaviour
             }
             // declare some useful variables
             targetOffset = Vector3.Lerp(targetOffset, desiredOffset, smoothingSpeed * Time.deltaTime);
-            var playerPosition = player.transform.position;
+            var playerPosition = playerTransform.position;
             var desiredPosition = new Vector3(playerPosition.x + targetOffset.x, playerPosition.y + targetOffset.y, playerPosition.z);
             // chasing movement
             var direction = (desiredPosition - transform.position).normalized;
@@ -100,7 +126,7 @@ public class MonsterMovementScripts : MonoBehaviour
             Monster.MovePosition(transform.position + direction * Time.deltaTime * speed * BandingFactor);
             // Debug.Log(speed * BandingFactor)
 
-        }
+        }*/
         
 
     }

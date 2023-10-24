@@ -78,11 +78,11 @@ public class MovementController : MonoBehaviour
                 bushCollisionCount = 0;  
                 break;
             default:
-                Debug.LogWarning("No bush collision!");      
+                // Debug.LogWarning("No bush collision!");      
                 break;
         }
 
-        Debug.Log(speedMultiplier);
+        // Debug.Log(speedMultiplier);
         
     }
 
