@@ -2,33 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Unity.VisualScripting;
 
 public class EnemyAI : MonoBehaviour
 {
     public Transform target;
     public float speed = 500f;
     public float nextWaypointDistance = 3.0f;
+    public float stalkingDistance = 5.0f;
     public Transform graphics;
 
     private Path path;
     private int currentWaypoint = 0;
     private bool reachedPathEnd = false;
+    public float pathUpdateTime = 0.1f;
 
     private Seeker seeker;
     private Rigidbody2D rb;
+
+    private enum Behavior
+    {
+        Stalking,
+        Chasing
+    };
+    private Behavior currentBehavior = Behavior.Stalking;
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        InvokeRepeating("UpdatePath", 0f, pathUpdateTime);
     }
 
     void UpdatePath()
     {
         if (seeker.IsDone())
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        {
+            switch (currentBehavior)
+            {
+                case Behavior.Chasing:
+                    seeker.StartPath(rb.position, target.position, OnPathComplete);
+                    break;
+
+                case Behavior.Stalking:
+                    float dist = Vector2.Distance(rb.position, target.position);
+                    Vector2 newTarget = rb.position + (((Vector2)target.position - rb.position).normalized * (dist - stalkingDistance));
+                    seeker.StartPath(rb.position, newTarget, OnPathComplete);
+                    break;
+
+                default: break;
+            }
+        }
     }
 
     void OnPathComplete(Path p)
