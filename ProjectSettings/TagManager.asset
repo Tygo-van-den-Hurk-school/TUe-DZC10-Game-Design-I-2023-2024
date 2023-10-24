@@ -8,6 +8,7 @@ TagManager:
   - CutSceneTrigger
   - Monster
   - Rock
+  - Bush
   layers:
   - Default
   - TransparentFX
