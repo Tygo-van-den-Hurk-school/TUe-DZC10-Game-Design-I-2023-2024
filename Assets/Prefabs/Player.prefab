@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 7635673359856705678}
   - component: {fileID: 5753622734457733989}
   - component: {fileID: 5309990975846908224}
-  - component: {fileID: 2631881698653018271}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -69,7 +68,6 @@ Transform:
   m_Children:
   - {fileID: 6290556294277621942}
   - {fileID: 1710116637657694748}
-  - {fileID: 4401222093198322545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3205351367035058127
@@ -163,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56312661b666e114a9f11d18e82752fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 525
+  m_JumpForce: 400
   m_JumpMultiplier: 0
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
@@ -195,8 +193,6 @@ MonoBehaviour:
   characterController: {fileID: 7653818043486015987}
   movementSpeed: 40
   slimeSlowDownFactor: 0.5
-  bushSlowDownFactor: 0.9
-  gameOver: 0
   cutsceneManager: {fileID: 0}
   characterStunned: 0
 --- !u!58 &5753622734457733989
@@ -279,21 +275,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2631881698653018271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3777302077390621777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd48b2531f8325245aa77076ca85197f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementcontroller: {fileID: 7635673359856705678}
-  gameOverCanvas: {fileID: 0}
-  retryButton: {fileID: 0}
 --- !u!1 &4285559329483365792
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,85 +306,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3569279005676328187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8241203992988197585
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4401222093198322545}
-  - component: {fileID: 6155547857756309375}
-  m_Layer: 0
-  m_Name: Light 2D
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4401222093198322545
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8241203992988197585}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35000002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3569279005676328187}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6155547857756309375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8241203992988197585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
-  m_LightType: 3
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 0.5019608, g: 0.94509804, b: 0.9229632, a: 1}
-  m_Intensity: 1
-  m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 0.75
-  m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
-  m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 4
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -10.8681, y: -11.157251, z: 0}
-  - {x: 18.592543, y: -10.207187, z: 0}
-  - {x: 18.633848, y: 1.3674502, z: 0}
-  - {x: -10.868099, y: 0.21084976, z: 0}
