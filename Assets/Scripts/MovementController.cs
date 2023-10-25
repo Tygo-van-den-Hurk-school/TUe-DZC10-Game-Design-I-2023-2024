@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
     public CharacterController2D characterController;
 
+    public EnemyAI enemyAI;             // Monster object
     public float movementSpeed = 40f;
     private float movementDirection;    // Direction in which player should move. [-1, 1]; -1 -> left; 1 -> right.
 
@@ -125,8 +126,9 @@ public class MovementController : MonoBehaviour
                 OnStunned();
                 break;
             case "Spike":
-                Debug.Log("Player lost the game!");
-                gameOver = true;
+                Debug.Log("Monster is alarmed");
+                // TO-DO: Trigger chasing behavior of monster when player collides with spike. 
+                // enemyAI.SetBehavior(Behavior.Chasing);
                 break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");

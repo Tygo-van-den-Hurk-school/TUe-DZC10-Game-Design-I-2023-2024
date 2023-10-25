@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
-    private enum Behavior
+    public enum Behavior
     {
         Stalking,
         Chasing
@@ -63,6 +63,11 @@ public class EnemyAI : MonoBehaviour
             path = p;
             currentWaypoint = 0;
         }
+    }
+
+    public void SetBehavior(Behavior desiredBehavior)
+    {
+        currentBehavior = desiredBehavior;
     }
 
     void FixedUpdate()
