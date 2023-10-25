@@ -25,10 +25,11 @@ public class ParallaxBackground : MonoBehaviour
         transform.position = new Vector2(transform.position.x + deltaMovement.x * parallaxEffectMultiplier, transform.position.y);
         lastCameraPosition = cameraTransform.position;
 
-        if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        // TODO: fix this, or make the background extremely long
+        /*if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
         {
             float offsetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
             transform.position = new Vector2(cameraTransform.position.x + offsetPositionX, transform.position.y);
-        }
+        }*/
     }
 }
