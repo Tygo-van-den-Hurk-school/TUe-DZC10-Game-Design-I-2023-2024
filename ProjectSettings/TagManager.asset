@@ -46,3 +46,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FadeSort
+    uniqueID: 2805476983
+    locked: 0
