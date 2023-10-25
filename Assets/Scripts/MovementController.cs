@@ -27,6 +27,7 @@ public class MovementController : MonoBehaviour
     public CutsceneScript cutsceneManager;
 
     public bool characterStunned = false;
+    public EnemyAI enemyAI;             // Enemy AI script on the monster (used to dynamically control enemy behavior)
 
     // Update is called once per frame
     void Update()
@@ -125,8 +126,8 @@ public class MovementController : MonoBehaviour
                 OnStunned();
                 break;
             case "Spike":
-                Debug.Log("Player lost the game!");
-                gameOver = true;
+                Debug.Log("Collided with spike");
+                enemyAI.SetBehavior(EnemyAI.Behavior.Chasing);
                 break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");

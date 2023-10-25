@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
-    private enum Behavior
+    public enum Behavior
     {
         Stalking,
         Chasing
@@ -97,5 +97,10 @@ public class EnemyAI : MonoBehaviour
         {
             graphics.localScale = new Vector3(3f, 7f, 1f);
         }
+    }
+
+    public void SetBehavior(Behavior desiredBehavior)
+    {
+        currentBehavior = desiredBehavior;
     }
 }

@@ -2412,6 +2412,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7635673359856705678, guid: 1663efddf378d4748b63162a4019875b, type: 3}
+      propertyPath: enemyAI
+      value: 
+      objectReference: {fileID: 1584645931}
+    - target: {fileID: 7635673359856705678, guid: 1663efddf378d4748b63162a4019875b, type: 3}
       propertyPath: cutsceneManager
       value: 
       objectReference: {fileID: 1893745413}
