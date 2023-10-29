@@ -154,6 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5637113793672612375}
   - component: {fileID: 8088053845827712295}
+  - component: {fileID: 1813914118316187287}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Monster
@@ -170,8 +171,8 @@ Transform:
   m_GameObject: {fileID: 7925880362760722719}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 7, z: 1}
+  m_LocalPosition: {x: 0.07, y: 0.09, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4629910765423540045}
@@ -217,7 +218,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af3d8091806616442b6a94f4c209ab0a, type: 3}
   m_Color: {r: 0.7169812, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -283,5 +284,23 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1281777751250377122, guid: a236aacf49d05f3409d56e83fe52f73c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1813914118316187287}
   m_SourcePrefab: {fileID: 100100000, guid: a236aacf49d05f3409d56e83fe52f73c, type: 3}
+--- !u!114 &1813914118316187287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7925880362760722719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24af71f60ef4f04495d20ac02d004fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterState1: {fileID: 21300000, guid: 0790771af77f30248a245df71bb0a54d, type: 3}
+  monsterState2: {fileID: 21300000, guid: af3d8091806616442b6a94f4c209ab0a, type: 3}
+  currentMonsterState: 0

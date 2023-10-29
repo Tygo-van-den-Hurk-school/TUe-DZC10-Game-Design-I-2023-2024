@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4787708913848227500}
   - component: {fileID: -7882456755528269882}
-  - component: {fileID: 3839130829803543074}
+  - component: {fileID: 1521653027688113781}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Bush
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3839130829803543074
-CircleCollider2D:
+--- !u!61 &1521653027688113781
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,6 +117,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.015625, y: 0.21288967}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.49122807, y: 0.03448276}
+    oldSize: {x: 1.78125, y: 0.90625}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.7496851
+  m_Size: {x: 1.5214291, y: 0.48827934}
+  m_EdgeRadius: 0
