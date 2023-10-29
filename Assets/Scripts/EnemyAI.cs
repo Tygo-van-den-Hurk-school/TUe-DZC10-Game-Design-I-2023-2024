@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using Unity.VisualScripting;
+using System.Threading.Tasks;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -20,12 +21,21 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private AudioManager audioManager;
+
     public enum Behavior
     {
         Stalking,
         Chasing
     };
     private Behavior currentBehavior = Behavior.Stalking;
+
+    private Vector2 dir;
+    private Vector2 force;
+    private float dist;
+    private float playerDist;
+    private bool willChase = false;
 
     void Start()
     {
@@ -81,12 +91,12 @@ public class EnemyAI : MonoBehaviour
         }*/
 
         // Move the enemy in the required direction
-        Vector2 dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = dir * speed * Time.deltaTime;
+        dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        force = dir * speed * Time.deltaTime;
         rb.AddForce(force);
 
         // Update its status along the path
-        float dist = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+        dist = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (dist < nextWaypointDistance)
             currentWaypoint++;
 
@@ -98,10 +108,39 @@ public class EnemyAI : MonoBehaviour
         {
             graphics.localScale = new Vector3(3f, 7f, 1f);
         }
+
+        // Make it scream
+        playerDist = Vector2.Distance(rb.position, target.position);
+        Debug.Log(playerDist);
+        if (playerDist < 6.0f)
+        {
+            switch (currentBehavior)
+            {
+                case Behavior.Stalking:
+                    audioManager.Play("Monster Coming");
+                    break;
+
+                case Behavior.Chasing:
+                    audioManager.Play("Monster Scream");
+                    break;
+
+                default: break;
+            }
+        } else
+        {
+            if (!willChase)
+            {
+                audioManager.Stop("Monster Coming");
+            }
+            audioManager.Stop("Monster Scream");
+        }
     }
 
-    public void SetBehavior(Behavior desiredBehavior)
+    public async void StartChasing()
     {
-        currentBehavior = desiredBehavior;
+        willChase = true;
+        audioManager.Play("Monster Coming");
+        await Task.Delay(7500);
+        currentBehavior = Behavior.Chasing;
     }
 }

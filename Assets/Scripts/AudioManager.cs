@@ -68,6 +68,17 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void Stop(string name)
+    {
+        Sound s = System.Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("No sound with name \"" + name + "\"found.");
+            return;
+        }
+        s.source.Stop();
+    }
+
     public void PlayFootsteps()
     {
         Sound s = footstepSounds[Random.Range(0, footstepSounds.Count())];

@@ -130,7 +130,7 @@ public class MovementController : MonoBehaviour
                 break;
             case "Spike":
                 Debug.Log("Collided with spike");
-                enemyAI.SetBehavior(EnemyAI.Behavior.Chasing);
+                enemyAI.StartChasing();
                 break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");

@@ -3784,6 +3784,18 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Monster Coming
+    clip: {fileID: 8300000, guid: ea1264faf9dbcb94ea62eebd84913f1f, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Monster Scream
+    clip: {fileID: 8300000, guid: 4e921dce93ce9d54982bd4ff52a3bde3, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   footstepSounds:
   - name: Footstep 1
     clip: {fileID: 8300000, guid: 551d550ab98e3cc4bb7793e752fe8628, type: 3}
@@ -14269,6 +14281,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1393799768}
+    - target: {fileID: 2957082071179002635, guid: cf2e5ef12b4f3ac4a84b94646e2cba57, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1160575374}
     - target: {fileID: 4055013354480935262, guid: cf2e5ef12b4f3ac4a84b94646e2cba57, type: 3}
       propertyPath: m_Name
       value: Enemy
