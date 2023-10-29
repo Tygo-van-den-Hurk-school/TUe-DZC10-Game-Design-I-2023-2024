@@ -27,11 +27,14 @@ public class MovementController : MonoBehaviour
     public CutsceneScript cutsceneManager;
 
     public bool characterStunned = false;
+    public EnemyAI enemyAI;             // Enemy AI script on the monster (used to dynamically control enemy behavior)
+
+    [SerializeField] private Animator playerAnimator;
 
     // Update is called once per frame
     void Update()
-    {   
-
+    {
+        playerAnimator.SetFloat("Speed", Mathf.Abs(movementDirection));
         // Read input
         // Disable input if character is stunned
         if (stunned) {
@@ -45,6 +48,7 @@ public class MovementController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 jump = true;
+                playerAnimator.SetBool("Jumping", true);
             }
 
             if (Input.GetButtonDown("Crouch"))
@@ -64,26 +68,28 @@ public class MovementController : MonoBehaviour
 
         // Bush detection
         // Permanent debuff (-10% speed if player hits a bush, -10% more if hit a bush twice, get stunned but reset speed if hit 3 times)
-        switch (bushCollisionCount) {
+        switch (bushCollisionCount)
+        {
             case 1:
-                speedMultiplier *= 0.9f;
-                characterController.m_JumpMultiplier = 0.9f;
+                speedMultiplier = bushSlowDownFactor;
+                characterController.m_JumpMultiplier = bushSlowDownFactor;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 2:
-                speedMultiplier *= 0.8f;
-                characterController.m_JumpMultiplier = 0.8f;
+                speedMultiplier = bushSlowDownFactor * bushSlowDownFactor;
+                characterController.m_JumpMultiplier = bushSlowDownFactor * bushSlowDownFactor;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 3:
+                Debug.Log("Stunned because bush!");
                 OnStunned();
-                bushCollisionCount = 0;  
+                bushCollisionCount = 0;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             default:
                 // Debug.LogWarning("No bush collision!");      
                 break;
         }
-
-        // Debug.Log(speedMultiplier);
-        
     }
 
     private void FixedUpdate()
@@ -112,8 +118,8 @@ public class MovementController : MonoBehaviour
                 cutsceneManager.StartCutscene();
                 break;
             case "Bush":
-                Debug.Log("Player hit the bush!");
-                bushCollisionCount += 1;
+                Debug.Log("Collided with bush");
+                bushCollisionCount++;
                 break;
             case "Monster":
                 Debug.Log("Player lost the game!");
@@ -123,10 +129,16 @@ public class MovementController : MonoBehaviour
                 Debug.Log("Collided with rock");
                 OnStunned();
                 break;
+            case "Spike":
+                Debug.Log("Collided with spike");
+                enemyAI.SetBehavior(EnemyAI.Behavior.Chasing);
+                break;
             default:
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
                 break;
         }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -140,5 +152,15 @@ public class MovementController : MonoBehaviour
         stunned = true;
         movementDirection = 0;
         startingStunnedTime = Time.time; 
+    }
+
+    public void OnLanding()
+    {
+        playerAnimator.SetBool("Jumping", false);
+    }
+
+    public void OnCrouching(bool crouching)
+    {
+        playerAnimator.SetBool("Crouching", crouching);
     }
 }

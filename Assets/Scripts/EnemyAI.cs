@@ -14,13 +14,13 @@ public class EnemyAI : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    private bool reachedPathEnd = false;
+    // private bool reachedPathEnd = false;
     public float pathUpdateTime = 0.1f;
 
     private Seeker seeker;
     private Rigidbody2D rb;
 
-    private enum Behavior
+    public enum Behavior
     {
         Stalking,
         Chasing
@@ -72,12 +72,13 @@ public class EnemyAI : MonoBehaviour
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedPathEnd = true;
+            // reachedPathEnd = true;
             return;
-        } else
+        }
+        /*else
         {
             reachedPathEnd = false;
-        }
+        }*/
 
         // Move the enemy in the required direction
         Vector2 dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
@@ -97,5 +98,10 @@ public class EnemyAI : MonoBehaviour
         {
             graphics.localScale = new Vector3(3f, 7f, 1f);
         }
+    }
+
+    public void SetBehavior(Behavior desiredBehavior)
+    {
+        currentBehavior = desiredBehavior;
     }
 }
