@@ -3748,6 +3748,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.1
+--- !u!1 &1160575373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1160575375}
+  - component: {fileID: 1160575374}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1160575374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160575373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918610f285cf3ea4bb102c59f381484f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Background Noise
+    clip: {fileID: 8300000, guid: c1d38db5aef89f84883df2a4e15c8559, type: 3}
+    volume: 0.065
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &1160575375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160575373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162787088
 GameObject:
   m_ObjectHideFlags: 0
@@ -4880,6 +4931,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1710116637657694748, guid: 1663efddf378d4748b63162a4019875b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1468
+      objectReference: {fileID: 0}
     - target: {fileID: 2631881698653018271, guid: 1663efddf378d4748b63162a4019875b, type: 3}
       propertyPath: retryButton
       value: 
@@ -14020,6 +14075,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2957082071179002635, guid: cf2e5ef12b4f3ac4a84b94646e2cba57, type: 3}
+      propertyPath: speed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2957082071179002635, guid: cf2e5ef12b4f3ac4a84b94646e2cba57, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1393799768}
@@ -16487,3 +16546,4 @@ SceneRoots:
   - {fileID: 2036039741}
   - {fileID: 150842522}
   - {fileID: 741168483}
+  - {fileID: 1160575375}

@@ -73,18 +73,15 @@ public class MovementController : MonoBehaviour
             case 1:
                 speedMultiplier = bushSlowDownFactor;
                 characterController.m_JumpMultiplier = bushSlowDownFactor;
-                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 2:
                 speedMultiplier = bushSlowDownFactor * bushSlowDownFactor;
                 characterController.m_JumpMultiplier = bushSlowDownFactor * bushSlowDownFactor;
-                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 3:
                 Debug.Log("Stunned because bush!");
                 OnStunned();
                 bushCollisionCount = 0;
-                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             default:
                 // Debug.LogWarning("No bush collision!");      
