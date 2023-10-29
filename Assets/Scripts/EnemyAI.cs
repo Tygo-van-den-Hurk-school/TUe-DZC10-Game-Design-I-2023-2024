@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    private bool reachedPathEnd = false;
+    // private bool reachedPathEnd = false;
     public float pathUpdateTime = 0.1f;
 
     private Seeker seeker;
@@ -72,12 +72,13 @@ public class EnemyAI : MonoBehaviour
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedPathEnd = true;
+            // reachedPathEnd = true;
             return;
-        } else
+        }
+        /*else
         {
             reachedPathEnd = false;
-        }
+        }*/
 
         // Move the enemy in the required direction
         Vector2 dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
