@@ -30,6 +30,7 @@ public class MovementController : MonoBehaviour
     public EnemyAI enemyAI;             // Enemy AI script on the monster (used to dynamically control enemy behavior)
 
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AudioManager audioManager;
 
     // Update is called once per frame
     void Update()
@@ -49,6 +50,7 @@ public class MovementController : MonoBehaviour
             {
                 jump = true;
                 playerAnimator.SetBool("Jumping", true);
+                audioManager.PlayJumping();
             }
 
             if (Input.GetButtonDown("Crouch"))
@@ -154,10 +156,16 @@ public class MovementController : MonoBehaviour
     public void OnLanding()
     {
         playerAnimator.SetBool("Jumping", false);
+        audioManager.PlayLanding();
     }
 
     public void OnCrouching(bool crouching)
     {
         playerAnimator.SetBool("Crouching", crouching);
+    }
+
+    public void OnRunning()
+    {
+        audioManager.PlayFootsteps();
     }
 }

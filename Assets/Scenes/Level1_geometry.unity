@@ -3784,6 +3784,189 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  footstepSounds:
+  - name: Footstep 1
+    clip: {fileID: 8300000, guid: 551d550ab98e3cc4bb7793e752fe8628, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 2
+    clip: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 3
+    clip: {fileID: 8300000, guid: 9c0c1f9411026f749bcb3746cd557bec, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 4
+    clip: {fileID: 8300000, guid: 38cb68a2a49e89c46bea091d75b27976, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 5
+    clip: {fileID: 8300000, guid: a62172e6f7275ff4f94c17edc8dfdd0d, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 6
+    clip: {fileID: 8300000, guid: 6a0b4267ac8ee8448b619bc9a3bca6d9, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 7
+    clip: {fileID: 8300000, guid: fc32c6fd07980144996b811e5d1f2971, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 8
+    clip: {fileID: 8300000, guid: 030e6a43a7d08bd4581668d53a9808f4, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 9
+    clip: {fileID: 8300000, guid: 56ea356e65429294f9098ef523fdb70b, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Footstep 10
+    clip: {fileID: 8300000, guid: 5799109e817d3704889f0499d06a23be, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  jumpingSounds:
+  - name: Jump 1
+    clip: {fileID: 8300000, guid: 984d316ed8be3ac4da9e31768a8b1fa9, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 2
+    clip: {fileID: 8300000, guid: 1a9abdcacc68aa447b151d0b1f93754b, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 3
+    clip: {fileID: 8300000, guid: fe175f117cf3fb2428d279bc830a1830, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 4
+    clip: {fileID: 8300000, guid: d3d29f80378ba8e4e9c00f92fc5b5d4e, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 5
+    clip: {fileID: 8300000, guid: 2642ca70ae8c186489090a89cce4e395, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 6
+    clip: {fileID: 8300000, guid: f193a8bae58928946916aab1c2068cf1, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 7
+    clip: {fileID: 8300000, guid: 0f4dd9cb929f5ac4f82b43558fde29c6, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 8
+    clip: {fileID: 8300000, guid: b04465ceef591864badb1aa5c65ee644, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 9
+    clip: {fileID: 8300000, guid: 0bd6d911a80f46040977198422926d29, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump 10
+    clip: {fileID: 8300000, guid: b15f8eaceae712040a379ad0aaff9240, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  landingSounds:
+  - name: Land 1
+    clip: {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 2
+    clip: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 3
+    clip: {fileID: 8300000, guid: 856b6d74addb9ad4ab2b7b47bae3e839, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 4
+    clip: {fileID: 8300000, guid: f2bc9c36f73ea50419060ec6eb40c246, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 5
+    clip: {fileID: 8300000, guid: 09226248e570c904a900ec2ecb767a68, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 6
+    clip: {fileID: 8300000, guid: ccfb18eb53b37384b9632ae00f725881, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 7
+    clip: {fileID: 8300000, guid: 8e0c586341010324fadd73453569f0aa, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 8
+    clip: {fileID: 8300000, guid: eb491a4de6595a246bbef0f211e2bd73, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 9
+    clip: {fileID: 8300000, guid: 54cd8769272b7ca4c9a1386d106f621d, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Land 10
+    clip: {fileID: 8300000, guid: 7d65afb5fe7bb7e41a03b001f5acfbde, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1160575375
 Transform:
   m_ObjectHideFlags: 0
@@ -4991,6 +5174,10 @@ PrefabInstance:
       propertyPath: enemyAI
       value: 
       objectReference: {fileID: 1677640188}
+    - target: {fileID: 7635673359856705678, guid: 1663efddf378d4748b63162a4019875b, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1160575374}
     - target: {fileID: 7635673359856705678, guid: 1663efddf378d4748b63162a4019875b, type: 3}
       propertyPath: cutsceneManager
       value: 
