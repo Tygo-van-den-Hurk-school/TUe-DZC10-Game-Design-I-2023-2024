@@ -68,27 +68,28 @@ public class MovementController : MonoBehaviour
 
         // Bush detection
         // Permanent debuff (-10% speed if player hits a bush, -10% more if hit a bush twice, get stunned but reset speed if hit 3 times)
-        switch (bushCollisionCount) {
+        switch (bushCollisionCount)
+        {
             case 1:
-                speedMultiplier *= bushSlowDownFactor;
-                characterController.m_JumpMultiplier *= bushSlowDownFactor;
+                speedMultiplier = bushSlowDownFactor;
+                characterController.m_JumpMultiplier = bushSlowDownFactor;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 2:
-                speedMultiplier *= bushSlowDownFactor;
-                characterController.m_JumpMultiplier *= bushSlowDownFactor;
+                speedMultiplier = bushSlowDownFactor * bushSlowDownFactor;
+                characterController.m_JumpMultiplier = bushSlowDownFactor * bushSlowDownFactor;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             case 3:
                 Debug.Log("Stunned because bush!");
                 OnStunned();
-                bushCollisionCount = 0;  
+                bushCollisionCount = 0;
+                Debug.Log(characterController.m_JumpMultiplier);
                 break;
             default:
                 // Debug.LogWarning("No bush collision!");      
                 break;
         }
-
-        // Debug.Log(speedMultiplier);
-        
     }
 
     private void FixedUpdate()
@@ -118,7 +119,7 @@ public class MovementController : MonoBehaviour
                 break;
             case "Bush":
                 Debug.Log("Collided with bush");
-                bushCollisionCount += 1;
+                bushCollisionCount++;
                 break;
             case "Monster":
                 Debug.Log("Player lost the game!");
@@ -136,6 +137,8 @@ public class MovementController : MonoBehaviour
                 Debug.LogWarning("Triggered collision with object with unknown tag: \"" + collision.tag + "\".");
                 break;
         }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
