@@ -29,10 +29,12 @@ public class MovementController : MonoBehaviour
     public bool characterStunned = false;
     public EnemyAI enemyAI;             // Enemy AI script on the monster (used to dynamically control enemy behavior)
 
+    [SerializeField] private Animator playerAnimator;
+
     // Update is called once per frame
     void Update()
-    {   
-
+    {
+        playerAnimator.SetFloat("Speed", Mathf.Abs(movementDirection));
         // Read input
         // Disable input if character is stunned
         if (stunned) {
@@ -46,6 +48,7 @@ public class MovementController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 jump = true;
+                playerAnimator.SetBool("Jumping", true);
             }
 
             if (Input.GetButtonDown("Crouch"))
@@ -146,5 +149,15 @@ public class MovementController : MonoBehaviour
         stunned = true;
         movementDirection = 0;
         startingStunnedTime = Time.time; 
+    }
+
+    public void OnLanding()
+    {
+        playerAnimator.SetBool("Jumping", false);
+    }
+
+    public void OnCrouching(bool crouching)
+    {
+        playerAnimator.SetBool("Crouching", crouching);
     }
 }
