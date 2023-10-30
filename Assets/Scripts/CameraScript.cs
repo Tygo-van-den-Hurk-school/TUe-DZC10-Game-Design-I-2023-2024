@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
     public Transform player;
     public Vector3 cameraOffset;
     public float cameraSpeedHorizontal = 1.3f;
-    public float cameraSpeedVertical = 0.2f;
+    public float cameraSpeedVertical = 1.3f;
     public float facingDirection = 1.0f;
 
     private Vector3 targetPosition;
